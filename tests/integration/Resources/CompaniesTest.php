@@ -2,13 +2,13 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
+use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\Companies;
 use SevenShores\Hubspot\Resources\Contacts;
-use SevenShores\Hubspot\Http\Client;
 
 /**
- * Class CompaniesTest
- * @package SevenShores\Hubspot\Tests\Integration\Resources
+ * Class CompaniesTest.
+ *
  * @group companies
  */
 class CompaniesTest extends \PHPUnit_Framework_TestCase
@@ -44,8 +44,8 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
         $id = $newCompanyResponse['companyId'];
         $companyDescription = 'A far better description than before';
         $properties = [
-            'name' => 'description',
-            'value' => $companyDescription
+            'name'  => 'description',
+            'value' => $companyDescription,
         ];
 
         $response = $this->companies->update($id, $properties);
@@ -65,10 +65,10 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
 
         $companies = [
             [
-                'objectId' => $id,
+                'objectId'   => $id,
                 'properties' => [
                     [
-                        'name' => 'description',
+                        'name'  => 'description',
                         'value' => $companyDescription,
                     ],
                 ],
@@ -172,7 +172,7 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
         $companyId = $newCompanyResponse['companyId'];
 
         /**
-         * @var \SevenShores\Hubspot\Http\Response $response
+         * @var \SevenShores\Hubspot\Http\Response
          */
         list($contactId, $response) = $this->createAssociatedContact($companyId);
 
@@ -202,11 +202,11 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
         list($contactId) = $this->createAssociatedContact($companyId);
         list($contactId2) = $this->createAssociatedContact($companyId);
 
-        $response = $this->companies->getAssociatedContacts($companyId, ['count' => 1, 'vidOffset' => $contactId ]);
+        $response = $this->companies->getAssociatedContacts($companyId, ['count' => 1, 'vidOffset' => $contactId]);
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertCount(1, $response['contacts']);
 
-        $offsetResponse = $this->companies->getAssociatedContacts($companyId, ['count' => 1, 'vidOffset' => $contactId2 + 1 ]);
+        $offsetResponse = $this->companies->getAssociatedContacts($companyId, ['count' => 1, 'vidOffset' => $contactId2 + 1]);
         $this->assertEquals(200, $offsetResponse->getStatusCode());
         $this->assertGreaterThanOrEqual($contactId2 + 1, $offsetResponse['vidOffset']);
     }
@@ -225,7 +225,6 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
         $this->assertGreaterThanOrEqual(1, $response['vids']);
         $this->assertContains($contactId1, $response['vids']);
         $this->assertContains($contactId2, $response['vids']);
-
     }
 
     /** @test */
@@ -269,7 +268,7 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Creates a Company with the HubSpotApi
+     * Creates a Company with the HubSpotApi.
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -279,16 +278,16 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
         $companyDescription = 'A company description';
         $properties = [
             [
-                'name' => 'name',
-                'value' => $companyName
+                'name'  => 'name',
+                'value' => $companyName,
             ],
             [
-                'name' => 'description',
-                'value' => $companyDescription
+                'name'  => 'description',
+                'value' => $companyDescription,
             ],
             [
-                'name' => 'domain',
-                'value' => 'example.com'
+                'name'  => 'domain',
+                'value' => 'example.com',
             ],
         ];
 
@@ -300,7 +299,7 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Creates a new contact with the HubSpotApi
+     * Creates a new contact with the HubSpotApi.
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -309,7 +308,7 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
         $contactsClient = new Contacts(new Client(['key' => 'demo']));
 
         $contactResponse = $contactsClient->create([
-            ['property' => 'email', 'value' => 'rw_test' . uniqid() . '@hubspot.com'],
+            ['property' => 'email', 'value' => 'rw_test'.uniqid().'@hubspot.com'],
             ['property' => 'firstname', 'value' => 'joe'],
             ['property' => 'lastname', 'value' => 'user'],
         ]);
@@ -320,7 +319,7 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Creates an associated contact for a new company with the HubSpotApi
+     * Creates an associated contact for a new company with the HubSpotApi.
      *
      * @param int $companyId The id of the company where to create the new contact.
      *
@@ -337,5 +336,4 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
 
         return [$contactId, $response];
     }
-
 }

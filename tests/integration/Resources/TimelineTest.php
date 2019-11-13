@@ -76,7 +76,7 @@ class TimelineTest extends \PHPUnit_Framework_TestCase
         $response = $this->timeline->createOrUpdate(
             self::APP_ID,
             $this->eventTypeId,
-            'TEST-PHP-HUBSPOT-'.substr(md5(microtime()),rand(0,26),16),
+            'TEST-PHP-HUBSPOT-'.substr(md5(microtime()), rand(0, 26), 16),
             null,
             'demo@demo.com',
             null,
@@ -101,22 +101,22 @@ class TimelineTest extends \PHPUnit_Framework_TestCase
         $events = [
             [
                 'eventTypeId'            => $this->eventTypeId,
-                'id'                     => substr(md5(microtime()),rand(0,26),16),
+                'id'                     => substr(md5(microtime()), rand(0, 26), 16),
                 'email'                  => 'demo@demo.com',
                 'extraData'              => [
                     $eventTypeProperty->name => 'BAM',
                 ],
-                'timestamp'              => ms_timestamp($timestamp)
+                'timestamp'              => ms_timestamp($timestamp),
             ],
             [
                 'eventTypeId'            => $this->eventTypeId,
-                'id'                     => substr(md5(microtime()),rand(0,26),16),
+                'id'                     => substr(md5(microtime()), rand(0, 26), 16),
                 'email'                  => 'demo2@demo.com',
                 'extraData'              => [
                     $eventTypeProperty->name => 'WAM',
                 ],
-                'timestamp'              => ms_timestamp($timestamp)
-            ]
+                'timestamp'              => ms_timestamp($timestamp),
+            ],
         ];
 
         $response = $this->timeline->createOrUpdateBatch(
@@ -125,7 +125,6 @@ class TimelineTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals(204, $response->getStatusCode());
-
     }
 
     /**
@@ -225,7 +224,7 @@ class TimelineTest extends \PHPUnit_Framework_TestCase
      */
     public function createEventTypeProperty()
     {
-        $name = 'property-' . substr(md5(microtime()),rand(0,26),5);
+        $name = 'property-'.substr(md5(microtime()), rand(0, 26), 5);
         $label = 'Property';
         $propertyType = 'String';
 

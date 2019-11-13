@@ -9,7 +9,7 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
     {
         $query = [
             'firstname' => 'joe',
-            'lastname'  => 'blo'
+            'lastname'  => 'blo',
         ];
 
         $queryString = build_query_string($query);
@@ -23,8 +23,8 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
         $query = [
             'property' => [
                 'firstname',
-                'lastname'
-            ]
+                'lastname',
+            ],
         ];
 
         $queryString = build_query_string($query);
@@ -46,12 +46,12 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
     public function build_nested_batch_with_encoding_RFC3986()
     {
         $query = [
-            'email' => 'test@test.com',
+            'email'       => 'test@test.com',
             'description' => 'two words',
-            'property' => [
+            'property'    => [
                 'firstname',
-                'lastname'
-            ]
+                'lastname',
+            ],
         ];
 
         $queryString = build_query_string($query);
@@ -66,12 +66,12 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
     public function build_nested_batch_with_encoding_RFC1738()
     {
         $query = [
-            'email' => 'test@test.com',
+            'email'       => 'test@test.com',
             'description' => 'two words',
-            'property' => [
+            'property'    => [
                 'firstname',
-                'lastname'
-            ]
+                'lastname',
+            ],
         ];
 
         $queryString = build_query_string($query, PHP_QUERY_RFC1738);

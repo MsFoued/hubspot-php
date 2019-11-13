@@ -14,7 +14,7 @@ class ContactProperties extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function all()
+    public function all()
     {
         $endpoint = 'https://api.hubapi.com/contacts/v2/properties';
 
@@ -29,9 +29,10 @@ class ContactProperties extends Resource
      * @see http://developers.hubspot.com/docs/methods/companies/get_contact_property
      *
      * @param string $name The name of the property.
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function get($name)
+    public function get($name)
     {
         $endpoint = "https://api.hubapi.com/contacts/v2/properties/named/{$name}";
 
@@ -47,11 +48,12 @@ class ContactProperties extends Resource
      * @see http://developers.hubspot.com/docs/methods/contacts/v2/create_contacts_property
      *
      * @param array $property
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function create($property)
+    public function create($property)
     {
-        $endpoint = "https://api.hubapi.com/contacts/v2/properties";
+        $endpoint = 'https://api.hubapi.com/contacts/v2/properties';
 
         $options['json'] = $property;
 
@@ -67,9 +69,10 @@ class ContactProperties extends Resource
      *
      * @param string $name
      * @param array  $property
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function update($name, $property)
+    public function update($name, $property)
     {
         $endpoint = "https://api.hubapi.com/contacts/v2/properties/named/{$name}";
 
@@ -87,9 +90,10 @@ class ContactProperties extends Resource
      * @see http://developers.hubspot.com/docs/methods/contacts/v2/delete_contact_property
      *
      * @param string $name
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function delete($name)
+    public function delete($name)
     {
         $endpoint = "https://api.hubapi.com/contacts/v2/properties/named/{$name}";
 
@@ -104,11 +108,12 @@ class ContactProperties extends Resource
      * @see http://developers.hubspot.com/docs/methods/contacts/v2/get_contact_property_groups
      *
      * @param bool $includeProperties
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getGroups($includeProperties = false)
+    public function getGroups($includeProperties = false)
     {
-        $endpoint = "https://api.hubapi.com/contacts/v2/groups";
+        $endpoint = 'https://api.hubapi.com/contacts/v2/groups';
 
         $queryString = build_query_string(['includeProperties' => $includeProperties]);
 
@@ -124,11 +129,12 @@ class ContactProperties extends Resource
      * @see http://developers.hubspot.com/docs/methods/contacts/v2/create_contacts_property_group
      *
      * @param array $group Group properties
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function createGroup($group)
+    public function createGroup($group)
     {
-        $endpoint = "https://api.hubapi.com/contacts/v2/groups";
+        $endpoint = 'https://api.hubapi.com/contacts/v2/groups';
 
         $options['json'] = $group;
 
@@ -144,9 +150,10 @@ class ContactProperties extends Resource
      *
      * @param string $name
      * @param array  $group
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function updateGroup($name, $group)
+    public function updateGroup($name, $group)
     {
         $endpoint = "https://api.hubapi.com/contacts/v2/groups/named/{$name}";
 
@@ -164,9 +171,10 @@ class ContactProperties extends Resource
      * @see http://developers.hubspot.com/docs/methods/contacts/v2/delete_contact_property_group
      *
      * @param string $name
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function deleteGroup($name)
+    public function deleteGroup($name)
     {
         $endpoint = "https://api.hubapi.com/contacts/v2/groups/named/{$name}";
 

@@ -1,14 +1,14 @@
 <?php
+
 namespace SevenShores\Hubspot\Resources;
 
-class DealPipelines extends Resource {
-
+class DealPipelines extends Resource
+{
     public function getAllPipelines()
     {
         $endpoint = 'https://api.hubapi.com/deals/v1/pipelines';
 
         return $this->client->request('get', $endpoint);
-
     }
 
     public function getPipeline($id)
@@ -20,7 +20,7 @@ class DealPipelines extends Resource {
 
     public function create(array $pipeline)
     {
-        $endpoint = "https://api.hubapi.com/deals/v1/pipelines";
+        $endpoint = 'https://api.hubapi.com/deals/v1/pipelines';
 
         $options['json'] = $pipeline;
 

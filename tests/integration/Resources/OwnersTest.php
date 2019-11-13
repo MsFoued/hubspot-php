@@ -2,12 +2,12 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Resources\Owners;
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\Owners;
 
 /**
- * Class OwnersTest
- * @package SevenShores\Hubspot\Tests\Integration\Resources
+ * Class OwnersTest.
+ *
  * @group owners
  */
 class OwnersTest extends \PHPUnit_Framework_TestCase
@@ -102,7 +102,8 @@ class OwnersTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Creates an Owner with the HubSpotApi
+     * Creates an Owner with the HubSpotApi.
+     *
      * @param string $email
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -110,17 +111,17 @@ class OwnersTest extends \PHPUnit_Framework_TestCase
     private function createOwner($email = 'test@owner.com')
     {
         $response = $this->owners->create([
-            'type' => 'PERSON',
-            'portalId' => 62515, //demo portal id (http://developers.hubspot.com/docs/overview)
-            'firstName' => 'Testing',
-            'lastName' => 'Owner',
-            'email' => $email,
+            'type'       => 'PERSON',
+            'portalId'   => 62515, //demo portal id (http://developers.hubspot.com/docs/overview)
+            'firstName'  => 'Testing',
+            'lastName'   => 'Owner',
+            'email'      => $email,
             'remoteList' => [
                 [
-                    'portalId' => 62515,
+                    'portalId'   => 62515,
                     'remoteType' => 'EMAIL',
-                    'remoteId' => 'dev_'.$email,
-                    'active' => true,
+                    'remoteId'   => 'dev_'.$email,
+                    'active'     => true,
                 ],
             ],
         ]);

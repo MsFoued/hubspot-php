@@ -2,8 +2,8 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Resources\BlogPosts;
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\BlogPosts;
 
 class BlogPostsTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,7 +24,7 @@ class BlogPostsTest extends \PHPUnit_Framework_TestCase
         sleep(1);
 
         $response = $this->blogPosts->create([
-            'name'             => 'My Super Awesome Post ' . uniqid(),
+            'name'             => 'My Super Awesome Post '.uniqid(),
             'content_group_id' => 351076997,
         ]);
 
@@ -137,7 +137,7 @@ class BlogPostsTest extends \PHPUnit_Framework_TestCase
     {
         $post = $this->createBlogPost();
 
-        $response = $this->blogPosts->publishAction($post->id, "push-buffer-live");
+        $response = $this->blogPosts->publishAction($post->id, 'push-buffer-live');
 
         $this->assertEquals(200, $response->getStatusCode());
     }

@@ -3,16 +3,16 @@
 namespace SevenShores\Hubspot\Resources;
 
 /**
- * Class Owners
- * @package SevenShores\Hubspot\Resources
+ * Class Owners.
  */
 class Owners extends Resource
 {
     /**
      * @param array $properties
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function create($properties)
+    public function create($properties)
     {
         $endpoint = 'https://api.hubapi.com/owners/v2/owners/';
         $options['json'] = $properties;
@@ -21,11 +21,12 @@ class Owners extends Resource
     }
 
     /**
-     * @param int $id
+     * @param int   $id
      * @param array $properties
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function update($id, $properties)
+    public function update($id, $properties)
     {
         $endpoint = "https://api.hubapi.com/owners/v2/owners/{$id}";
         $options['json'] = $properties;
@@ -35,9 +36,10 @@ class Owners extends Resource
 
     /**
      * @param int $id
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getById($id)
+    public function getById($id)
     {
         $endpoint = 'https://api.hubapi.com/owners/v2/owners/'.$id;
 
@@ -46,9 +48,10 @@ class Owners extends Resource
 
     /**
      * @param array $params
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function all($params = [])
+    public function all($params = [])
     {
         $endpoint = 'https://api.hubapi.com/owners/v2/owners';
 

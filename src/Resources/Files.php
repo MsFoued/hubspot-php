@@ -9,11 +9,12 @@ class Files extends Resource
      *
      * @param string $file   File path
      * @param array  $params Optional parameters
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function upload($file, $params = [])
+    public function upload($file, $params = [])
     {
-        $endpoint = "https://api.hubapi.com/filemanager/api/v2/files";
+        $endpoint = 'https://api.hubapi.com/filemanager/api/v2/files';
 
         $queryString = build_query_string([
             'overwrite' => isset($params['overwrite']) ? $params['overwrite'] : false,
@@ -21,16 +22,16 @@ class Files extends Resource
 
         $options['multipart'] = [
             [
-                'name' => 'files',
-                'contents' => fopen($file, 'rb')
+                'name'     => 'files',
+                'contents' => fopen($file, 'rb'),
             ],
             [
-                'name' => 'file_names',
-                'contents' => isset($params['file_names']) ? $params['file_names'] : null
-            ],[
-                'name' => 'folder_paths',
-                'contents' => isset($params['folder_paths']) ? $params['folder_paths'] : null
-            ]
+                'name'     => 'file_names',
+                'contents' => isset($params['file_names']) ? $params['file_names'] : null,
+            ], [
+                'name'     => 'folder_paths',
+                'contents' => isset($params['folder_paths']) ? $params['folder_paths'] : null,
+            ],
         ];
 
         return $this->client->request('post', $endpoint, $options, $queryString);
@@ -40,34 +41,35 @@ class Files extends Resource
      * Get meta data for all files.
      *
      * @param array $params Optional parameters
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function all($params = [])
+    public function all($params = [])
     {
-        $endpoint = "https://api.hubapi.com/filemanager/api/v2/files";
+        $endpoint = 'https://api.hubapi.com/filemanager/api/v2/files';
 
         $queryString = build_query_string($params);
 
         return $this->client->request('get', $endpoint, [], $queryString);
     }
 
-
     /**
      * Upload a replacement file.
      *
      * @param int    $file_id The file ID
      * @param string $file    The file path
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function replace($file_id, $file)
+    public function replace($file_id, $file)
     {
         $endpoint = "https://api.hubapi.com/filemanager/api/v2/files/{$file_id}";
 
         $options['multipart'] = [
             [
-                'name' => 'files',
-                'contents' => fopen($file, 'rb')
-            ]
+                'name'     => 'files',
+                'contents' => fopen($file, 'rb'),
+            ],
         ];
 
         return $this->client->request('post', $endpoint, $options);
@@ -77,9 +79,10 @@ class Files extends Resource
      * Get file metadata.
      *
      * @param $file_id
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function meta($file_id)
+    public function meta($file_id)
     {
         $endpoint = "https://api.hubapi.com/filemanager/api/v2/files/{$file_id}";
 
@@ -90,9 +93,10 @@ class Files extends Resource
      * Archive a file.
      *
      * @param int $file_id The file ID
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function archive($file_id)
+    public function archive($file_id)
     {
         $endpoint = "https://api.hubapi.com/filemanager/api/v2/files/{$file_id}/archive";
 
@@ -103,9 +107,10 @@ class Files extends Resource
      * Delete a file.
      *
      * @param int $file_id The file ID
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function delete($file_id)
+    public function delete($file_id)
     {
         $endpoint = "https://api.hubapi.com/filemanager/api/v2/files/{$file_id}";
 
@@ -122,9 +127,10 @@ class Files extends Resource
      *
      * @param int   $file_id
      * @param array $params
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function move($file_id, $params = [])
+    public function move($file_id, $params = [])
     {
         $endpoint = "https://api.hubapi.com/filemanager/api/v2/files/{$file_id}/move-file";
 
@@ -138,11 +144,12 @@ class Files extends Resource
      *
      * @param string $folder_name
      * @param int    $parent_folder_id
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function createFolder($folder_name, $parent_folder_id)
+    public function createFolder($folder_name, $parent_folder_id)
     {
-        $endpoint = "https://api.hubapi.com/filemanager/api/v2/folders";
+        $endpoint = 'https://api.hubapi.com/filemanager/api/v2/folders';
 
         $options['json'] = [
             'name'             => $folder_name,
@@ -156,11 +163,12 @@ class Files extends Resource
      * List folders metadata.
      *
      * @param array $params
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function folders($params = [])
+    public function folders($params = [])
     {
-        $endpoint = "https://api.hubapi.com/filemanager/api/v2/folders";
+        $endpoint = 'https://api.hubapi.com/filemanager/api/v2/folders';
 
         $queryString = build_query_string($params);
 
@@ -172,9 +180,10 @@ class Files extends Resource
      *
      * @param int   $folder_id
      * @param array $params
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function updateFolder($folder_id, $params = [])
+    public function updateFolder($folder_id, $params = [])
     {
         $endpoint = "https://api.hubapi.com/filemanager/api/v2/folders/{$folder_id}";
 
@@ -187,9 +196,10 @@ class Files extends Resource
      * Delete a folder.
      *
      * @param int $folder_id
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function deleteFolder($folder_id)
+    public function deleteFolder($folder_id)
     {
         $endpoint = "https://api.hubapi.com/filemanager/api/v2/folders/{$folder_id}";
 
@@ -200,9 +210,10 @@ class Files extends Resource
      * Get the folder by ID.
      *
      * @param int $folder_id
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getFolderById($folder_id)
+    public function getFolderById($folder_id)
     {
         $endpoint = "https://api.hubapi.com/filemanager/api/v2/folders/{$folder_id}";
 
@@ -214,9 +225,10 @@ class Files extends Resource
      *
      * @param int   $folder_id
      * @param array $params
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function moveFolder($folder_id, $params = [])
+    public function moveFolder($folder_id, $params = [])
     {
         $endpoint = "https://api.hubapi.com/filemanager/api/v2/folders/{$folder_id}/move-folder";
 
@@ -224,5 +236,4 @@ class Files extends Resource
 
         return $this->client->request('post', $endpoint, $options);
     }
-
 }

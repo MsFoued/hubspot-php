@@ -2,9 +2,9 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
+use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\CalendarEvents;
 use SevenShores\Hubspot\Resources\Owners;
-use SevenShores\Hubspot\Http\Client;
 
 class CalendarEventsTest extends \PHPUnit_Framework_TestCase
 {
@@ -17,7 +17,6 @@ class CalendarEventsTest extends \PHPUnit_Framework_TestCase
      * @var EventsTask
      */
     private $calendarEvents;
-
 
     public function setUp()
     {
@@ -36,13 +35,13 @@ class CalendarEventsTest extends \PHPUnit_Framework_TestCase
         $owner = $this->createOwner($email);
         $ownerData = $owner->toArray();
         $eventData = [
-            'eventDate' => strtotime('+1 day') * 1000, #timestamp in milliseconds
-            'eventType' => 'PUBLISHING_TASK',
-            'category' => 'EMAIL',
-            'state' => 'TODO',
-            'name' => 'Some task',
+            'eventDate'   => strtotime('+1 day') * 1000, //timestamp in milliseconds
+            'eventType'   => 'PUBLISHING_TASK',
+            'category'    => 'EMAIL',
+            'state'       => 'TODO',
+            'name'        => 'Some task',
             'description' => 'Very important task',
-            'ownerId' => $ownerData['ownerId'],
+            'ownerId'     => $ownerData['ownerId'],
         ];
         $response = $this->calendarEvents->createTask($eventData);
         $this->assertSame(200, $response->getStatusCode());
@@ -53,7 +52,8 @@ class CalendarEventsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Creates an Owner with the HubSpotApi
+     * Creates an Owner with the HubSpotApi.
+     *
      * @param string $email
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -61,17 +61,17 @@ class CalendarEventsTest extends \PHPUnit_Framework_TestCase
     private function createOwner($email = 'test@owner.com')
     {
         $response = $this->owners->create([
-            'type' => 'PERSON',
-            'portalId' => 62515, //demo portal id (http://developers.hubspot.com/docs/overview)
-            'firstName' => 'Testing',
-            'lastName' => 'Owner',
-            'email' => $email,
+            'type'       => 'PERSON',
+            'portalId'   => 62515, //demo portal id (http://developers.hubspot.com/docs/overview)
+            'firstName'  => 'Testing',
+            'lastName'   => 'Owner',
+            'email'      => $email,
             'remoteList' => [
                 [
-                    'portalId' => 62515,
+                    'portalId'   => 62515,
                     'remoteType' => 'EMAIL',
-                    'remoteId' => 'dev_'.$email,
-                    'active' => true,
+                    'remoteId'   => 'dev_'.$email,
+                    'active'     => true,
                 ],
             ],
         ]);
@@ -89,8 +89,8 @@ class CalendarEventsTest extends \PHPUnit_Framework_TestCase
         $task = $this->createTask();
 
         $response = $this->calendarEvents->updateTask($task->id, [
-            'name' => 'Another name',
-            'description' => 'Another description'
+            'name'        => 'Another name',
+            'description' => 'Another description',
         ]);
 
         $this->assertSame(200, $response->getStatusCode());
@@ -117,15 +117,15 @@ class CalendarEventsTest extends \PHPUnit_Framework_TestCase
         $task = $this->createTask();
 
         $response = $this->calendarEvents->deleteTask($task->id);
-        $this->assertEquals(204, $response->getStatusCode()); #return no content
+        $this->assertEquals(204, $response->getStatusCode()); //return no content
     }
 
     /** @test */
     public function all()
     {
         $task = $this->createTask();
-        $startDate = $task['eventDate'] - 60*60*1000;
-        $endDate = $task['eventDate'] + 60*60*1000;
+        $startDate = $task['eventDate'] - 60 * 60 * 1000;
+        $endDate = $task['eventDate'] + 60 * 60 * 1000;
 
         $response = $this->calendarEvents->all($startDate, $endDate);
         $this->assertEquals(200, $response->getStatusCode());
@@ -136,8 +136,8 @@ class CalendarEventsTest extends \PHPUnit_Framework_TestCase
     public function allTasks()
     {
         $task = $this->createTask();
-        $startDate = $task['eventDate'] - 60*60*1000;
-        $endDate = $task['eventDate'] + 60*60*1000;
+        $startDate = $task['eventDate'] - 60 * 60 * 1000;
+        $endDate = $task['eventDate'] + 60 * 60 * 1000;
 
         $response = $this->calendarEvents->allTasks($startDate, $endDate);
         $this->assertEquals(200, $response->getStatusCode());

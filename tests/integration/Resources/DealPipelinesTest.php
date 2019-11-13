@@ -5,9 +5,7 @@ namespace SevenShores\Hubspot\Resources;
 use SevenShores\Hubspot\Http\Client;
 
 /**
- * Class DealPipelinesTest
- * @package SevenShores\Hubspot\Resources
- * group dealPipelines
+ * Class DealPipelinesTest.
  */
 class DealPipelinesTest extends \PHPUnit_Framework_TestCase
 {
@@ -36,7 +34,7 @@ class DealPipelinesTest extends \PHPUnit_Framework_TestCase
         // in order to get a reliable result, no other items are tested
         $expected = [
             [
-                'label' => 'Sales pipeline',
+                'label'  => 'Sales pipeline',
                 'stages' => 6,
             ],
         ];
@@ -62,15 +60,15 @@ class DealPipelinesTest extends \PHPUnit_Framework_TestCase
     {
         $this->markTestSkipped('Test works only once, then return code 409 is given');
         $response = $this->dealPipelines->create([
-            'label' => 'New Business Pipeline',
+            'label'        => 'New Business Pipeline',
             'displayOrder' => 5,
-            'stages' => [
+            'stages'       => [
                 [
-                    'label' => 'Initial Stage',
+                    'label'        => 'Initial Stage',
                     'displayOrder' => 0,
-                    'probability' => 0.3,
-                ]
-            ]
+                    'probability'  => 0.3,
+                ],
+            ],
         ]);
         $data = $response->getData();
         $this->assertEquals('New Business Pipeline', $data->label);
@@ -88,12 +86,12 @@ class DealPipelinesTest extends \PHPUnit_Framework_TestCase
         $id = $pipelineData[1]->pipelineId;
         $newLabel = 'My shiny new updated pipeline';
         $response = $this->dealPipelines->update($id, [
-            'label' => $newLabel,
+            'label'      => $newLabel,
             'pipelineId' => $id,
-            'stages' => [
+            'stages'     => [
                 [
                     'label' => 'new stage',
-                ]
+                ],
             ],
         ]);
         $data = $response->getData();
@@ -111,5 +109,4 @@ class DealPipelinesTest extends \PHPUnit_Framework_TestCase
         $response = $this->dealPipelines->delete($id);
         $this->assertSame(204, $response->getStatusCode());
     }
-
 }

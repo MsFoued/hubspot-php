@@ -6,13 +6,14 @@ class CompanyProperties extends Resource
 {
     /**
      * Creates a property on every company object to store a specific piece of data.
+     *
      * @param array $property
      *
      * @see http://developers.hubspot.com/docs/methods/companies/create_company_property
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function create($property)
+    public function create($property)
     {
         $endpoint = 'https://api.hubapi.com/companies/v2/properties/';
 
@@ -23,14 +24,15 @@ class CompanyProperties extends Resource
 
     /**
      * Update the specified company-level property. This does not update the value on a specified company, but instead changes the definition of the company property.
+     *
      * @param string $propertyName
-     * @param array $property
+     * @param array  $property
      *
      * @see http://developers.hubspot.com/docs/methods/companies/update_company_property
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function update($propertyName, $property)
+    public function update($propertyName, $property)
     {
         $endpoint = "https://api.hubapi.com/companies/v2/properties/named/{$propertyName}";
 
@@ -42,13 +44,14 @@ class CompanyProperties extends Resource
 
     /**
      * For a portal, delete an existing company property.
+     *
      * @param string $propertyName The API name of the property that you will be deleting.
      *
      * @see http://developers.hubspot.com/docs/methods/companies/delete_company_property
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function delete($propertyName)
+    public function delete($propertyName)
     {
         $endpoint = "https://api.hubapi.com/companies/v2/properties/named/{$propertyName}";
 
@@ -57,13 +60,14 @@ class CompanyProperties extends Resource
 
     /**
      * Returns a JSON object representing the definition for a given company property.
+     *
      * @param string $propertyName The API name of the property that you wish to see metadata for.
      *
      * @see http://developers.hubspot.com/docs/methods/companies/get_company_property
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function get($propertyName)
+    public function get($propertyName)
     {
         $endpoint = "https://api.hubapi.com/companies/v2/properties/named/{$propertyName}";
 
@@ -77,7 +81,7 @@ class CompanyProperties extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function all()
+    public function all()
     {
         $endpoint = 'https://api.hubapi.com/companies/v2/properties/';
 
@@ -86,13 +90,14 @@ class CompanyProperties extends Resource
 
     /**
      * Create a new company property group to gather like company-level data.
+     *
      * @param array $group Defines the group and any properties within it.
      *
      * @see http://developers.hubspot.com/docs/methods/companies/create_company_property_group
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function createGroup($group)
+    public function createGroup($group)
     {
         $endpoint = 'https://api.hubapi.com/companies/v2/groups/';
 
@@ -103,14 +108,15 @@ class CompanyProperties extends Resource
 
     /**
      * Update a previously created company property group.
+     *
      * @param string $groupName The API name of the property group that you will be updating.
-     * @param array $group Defines the property group and any properties within it.
+     * @param array  $group     Defines the property group and any properties within it.
      *
      * @see http://developers.hubspot.com/docs/methods/companies/update_company_property_group
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function updateGroup($groupName, $group)
+    public function updateGroup($groupName, $group)
     {
         $endpoint = "https://api.hubapi.com/companies/v2/groups/named/{$groupName}";
 
@@ -122,13 +128,14 @@ class CompanyProperties extends Resource
 
     /**
      * Delete an existing company property group.
+     *
      * @param string $groupName The API name of the property group that you will be deleting.
      *
      * @see http://developers.hubspot.com/docs/methods/companies/delete_company_property_group
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function deleteGroup($groupName)
+    public function deleteGroup($groupName)
     {
         $endpoint = "https://api.hubapi.com/companies/v2/groups/named/{$groupName}";
 
@@ -137,17 +144,18 @@ class CompanyProperties extends Resource
 
     /**
      * Returns all of the company property groups for a given portal.
+     *
      * @param bool $includeProperties If true returns all of the properties for each company property group.
      *
      * @see http://developers.hubspot.com/docs/methods/companies/get_company_property_groups
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getAllGroups($includeProperties = false)
+    public function getAllGroups($includeProperties = false)
     {
         $endpoint = 'https://api.hubapi.com/companies/v2/groups/';
 
-        if($includeProperties){
+        if ($includeProperties) {
             $queryString = build_query_string(['includeProperties' => 'true']);
 
             return $this->client->request('get', $endpoint, [], $queryString);

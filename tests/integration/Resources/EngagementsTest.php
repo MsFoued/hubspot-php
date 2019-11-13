@@ -2,9 +2,9 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Resources\Engagements;
-use SevenShores\Hubspot\Resources\Contacts;
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\Contacts;
+use SevenShores\Hubspot\Resources\Engagements;
 
 class EngagementsTest extends \PHPUnit_Framework_TestCase
 {
@@ -26,15 +26,15 @@ class EngagementsTest extends \PHPUnit_Framework_TestCase
         sleep(1);
         $contact = $this->contacts->create([]);
         $response = $this->engagements->create([
-            "active" => true,
-            "ownerId" => 1,
-            "type" => "NOTE",
-            "timestamp" => 1409172644778,
+            'active'    => true,
+            'ownerId'   => 1,
+            'type'      => 'NOTE',
+            'timestamp' => 1409172644778,
         ], [
-            "contactIds" => [$contact->vid],
-            "companyIds" => [],
-            "dealIds" => [],
-            "ownerIds" => [],
+            'contactIds' => [$contact->vid],
+            'companyIds' => [],
+            'dealIds'    => [],
+            'ownerIds'   => [],
         ], [
             'body' => 'note body',
         ]);
@@ -50,10 +50,10 @@ class EngagementsTest extends \PHPUnit_Framework_TestCase
         $engagement = $this->createEngagement();
         $contact = $this->contacts->create([]);
         $response = $this->engagements->update($engagement->engagement->id, [
-            "active" => true,
-            "ownerId" => 1,
-            "type" => "NOTE",
-            "timestamp" => 1409172644778
+            'active'    => true,
+            'ownerId'   => 1,
+            'type'      => 'NOTE',
+            'timestamp' => 1409172644778,
         ], [
             'body' => 'note body',
         ]);

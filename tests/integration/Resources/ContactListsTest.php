@@ -2,8 +2,8 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Resources\ContactLists;
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\ContactLists;
 
 class ContactListsTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,7 +24,7 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
         sleep(1);
 
         $response = $this->contactLists->create([
-            'name'     => 'Test ' . uniqid(),
+            'name'     => 'Test '.uniqid(),
             'dynamic'  => true,
             'portalId' => 62515,
             'filters'  => [
@@ -104,7 +104,7 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
         $list = $this->createList();
 
         $response = $this->contactLists->update($list->listId, [
-            'name' => 'New test name ' . uniqid(),
+            'name' => 'New test name '.uniqid(),
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -128,8 +128,9 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
             $this->createList(),
         ];
 
-        $ids = array_reduce($lists, function($listIds, $list) {
+        $ids = array_reduce($lists, function ($listIds, $list) {
             $listIds[] = $list->listId;
+
             return $listIds;
         }, []);
 

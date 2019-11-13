@@ -6,8 +6,8 @@ use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\EcommerceBridge;
 
 /**
- * Class EcommerceBridgeTest
- * @package SevenShores\Hubspot\Tests\Integration\Resources
+ * Class EcommerceBridgeTest.
+ *
  * @group ecommerceBridge
  */
 class EcommerceBridgeTest extends \PHPUnit_Framework_TestCase
@@ -50,22 +50,22 @@ class EcommerceBridgeTest extends \PHPUnit_Framework_TestCase
     public function testUpsertSettings()
     {
         $settings = [
-            'enabled' => false,
-            'importOnInstall' => false,
+            'enabled'             => false,
+            'importOnInstall'     => false,
             'productSyncSettings' => [
                 'properties' => [
-                    ['propertyName' => 'test_name', 'dataType' => 'STRING', 'targetHubspotProperty' => 'name']
-                ]
+                    ['propertyName' => 'test_name', 'dataType' => 'STRING', 'targetHubspotProperty' => 'name'],
+                ],
             ],
             'dealSyncSettings' => [
-                'properties' => []
+                'properties' => [],
             ],
             'lineItemSyncSettings' => [
-                'properties' => []
+                'properties' => [],
             ],
             'contactSyncSettings' => [
-                'properties' => []
-            ]
+                'properties' => [],
+            ],
         ];
 
         $response = $this->ecommerceBridge->upsertSettings($settings);

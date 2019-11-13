@@ -2,8 +2,8 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Resources\BlogAuthors;
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\BlogAuthors;
 
 class BlogAuthorsTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,8 +24,8 @@ class BlogAuthorsTest extends \PHPUnit_Framework_TestCase
         sleep(1);
 
         $response = $this->blogAuthors->create([
-            'fullName' => 'John Smith ' . uniqid(),
-            'email' => 'john.smith' . uniqid() . '@example.com',
+            'fullName' => 'John Smith '.uniqid(),
+            'email'    => 'john.smith'.uniqid().'@example.com',
             'username' => 'john-smith',
         ]);
 
@@ -96,8 +96,8 @@ class BlogAuthorsTest extends \PHPUnit_Framework_TestCase
     public function create()
     {
         $response = $this->blogAuthors->create([
-            'fullName' => 'John Smith ' . uniqid(),
-            'email' => 'john.smith' . uniqid() . '@example.com',
+            'fullName' => 'John Smith '.uniqid(),
+            'email'    => 'john.smith'.uniqid().'@example.com',
             'username' => 'john-smith',
         ]);
 
@@ -110,7 +110,7 @@ class BlogAuthorsTest extends \PHPUnit_Framework_TestCase
         $author = $this->createBlogAuthor();
 
         $response = $this->blogAuthors->update($author->id, [
-            'bio' => 'Lorem ipsum dolor sit amet.',
+            'bio'     => 'Lorem ipsum dolor sit amet.',
             'website' => 'http://example.com',
         ]);
 

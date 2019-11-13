@@ -1,14 +1,15 @@
 <?php
+
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
+use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\Companies;
 use SevenShores\Hubspot\Resources\Contacts;
 use SevenShores\Hubspot\Resources\Deals;
-use SevenShores\Hubspot\Http\Client;
 
 /**
- * Class DealsTest
- * @package SevenShores\Hubspot\Tests\Integration\Resources
+ * Class DealsTest.
+ *
  * @group deals
  */
 class DealsTest extends \PHPUnit_Framework_TestCase
@@ -33,16 +34,16 @@ class DealsTest extends \PHPUnit_Framework_TestCase
         sleep(1);
 
         $response = $this->deals->create([
-            "properties" => [
+            'properties' => [
                 [
-                    "value" => "Cool Deal",
-                    "name" => "dealname"
+                    'value' => 'Cool Deal',
+                    'name'  => 'dealname',
                 ],
                 [
-                    "value" => "60000",
-                    "name" => "amount"
+                    'value' => '60000',
+                    'name'  => 'amount',
                 ],
-            ]
+            ],
         ]);
 
         return $response;
@@ -63,7 +64,7 @@ class DealsTest extends \PHPUnit_Framework_TestCase
         $contacts = new Contacts(new Client(['key' => 'demo']));
 
         $response = $contacts->create([
-            ['property' => 'email', 'value' => 'dl_test_contact'.uniqid().'@hubspot.com']
+            ['property' => 'email', 'value' => 'dl_test_contact'.uniqid().'@hubspot.com'],
         ]);
 
         return $response->vid;
@@ -107,10 +108,10 @@ class DealsTest extends \PHPUnit_Framework_TestCase
         $id = $response->dealId;
 
         $response = $this->deals->update($id, [
-            "properties" => [
+            'properties' => [
                 [
-                    "name"  => "amount",
-                    "value" => "70000",
+                    'name'  => 'amount',
+                    'value' => '70000',
                 ],
             ],
         ]);
@@ -141,19 +142,18 @@ class DealsTest extends \PHPUnit_Framework_TestCase
     public function recentlyCreated()
     {
         //Create 4 deals
-        for ($i=1; $i<=4; ++$i) {
+        for ($i = 1; $i <= 4; $i++) {
             $this->createDeal();
         }
 
         $response = $this->deals->getRecentlyCreated([
             'offset' => 1,
-            'count' => 3,
+            'count'  => 3,
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertSame(3, count($response['results']));
     }
-
 
     /**
      * @getAll
@@ -162,13 +162,12 @@ class DealsTest extends \PHPUnit_Framework_TestCase
     {
         $response = $this->deals->getAll([
             'offset' => 1,
-            'count' => 2,
+            'count'  => 2,
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertSame(2, count($response['results']));
     }
-
 
     /**
      * @test
@@ -177,7 +176,7 @@ class DealsTest extends \PHPUnit_Framework_TestCase
     {
         $response = $this->deals->getRecentlyModified([
             'offset' => 1,
-            'count' => 2,
+            'count'  => 2,
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -198,7 +197,7 @@ class DealsTest extends \PHPUnit_Framework_TestCase
         $response = $this->deals->associateWithCompany($dealId, [
             $firstCompanyId,
             $secondCompanyId,
-            $thirdCompanyId
+            $thirdCompanyId,
         ]);
         $this->assertSame(204, $response->getStatusCode());
 
@@ -240,7 +239,7 @@ class DealsTest extends \PHPUnit_Framework_TestCase
         $response = $this->deals->associateWithContact($dealId, [
             $firstContactId,
             $secondContactId,
-            $thirdContactId
+            $thirdContactId,
         ]);
         $this->assertSame(204, $response->getStatusCode());
 
@@ -279,10 +278,10 @@ class DealsTest extends \PHPUnit_Framework_TestCase
         $secondDeal = $this->createDeal()->dealId;
 
         $this->deals->associateWithCompany($firstDeal, [
-            $companyId
+            $companyId,
         ]);
         $this->deals->associateWithCompany($secondDeal, [
-            $companyId
+            $companyId,
         ]);
 
         $response = $this->deals->getAssociatedDeals('company', $companyId);
@@ -301,13 +300,13 @@ class DealsTest extends \PHPUnit_Framework_TestCase
         $thirdDeal = $this->createDeal()->dealId;
 
         $this->deals->associateWithContact($firstDeal, [
-            $contactId
+            $contactId,
         ]);
         $this->deals->associateWithContact($secondDeal, [
-            $contactId
+            $contactId,
         ]);
         $this->deals->associateWithContact($thirdDeal, [
-            $contactId
+            $contactId,
         ]);
 
         $response = $this->deals->getAssociatedDeals('contact', $contactId);

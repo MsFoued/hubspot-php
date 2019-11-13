@@ -8,9 +8,10 @@ class Webhooks extends Resource
      * Get list of subscriptions.
      *
      * @param int $app_id
+     *
      * @return \SevenShores\Hubspot\Http\Response
-     */    
-    function getSubscription($app_id)
+     */
+    public function getSubscription($app_id)
     {
         $endpoint = "https://api.hubapi.com/webhooks/v1/{$app_id}/subscriptions";
 
@@ -22,9 +23,10 @@ class Webhooks extends Resource
      *
      * @param int   $app_id
      * @param array $subscription
+     *
      * @return \SevenShores\Hubspot\Http\Response
-     */    
-    function createSubscription($app_id, $subscription)
+     */
+    public function createSubscription($app_id, $subscription)
     {
         $endpoint = "https://api.hubapi.com/webhooks/v1/{$app_id}/subscriptions";
 
@@ -39,9 +41,10 @@ class Webhooks extends Resource
      * @param int   $app_id
      * @param int   $subscription_id
      * @param array $subscription
+     *
      * @return \SevenShores\Hubspot\Http\Response
-     */    
-    function updateSubscription($app_id, $subscription_id, $subscription)
+     */
+    public function updateSubscription($app_id, $subscription_id, $subscription)
     {
         $endpoint = "https://api.hubapi.com/webhooks/v1/{$app_id}/subscriptions/{$subscription_id}";
 
@@ -55,9 +58,10 @@ class Webhooks extends Resource
      *
      * @param int $app_id
      * @param int $subscription_id
+     *
      * @return \SevenShores\Hubspot\Http\Response
-     */    
-    function deleteSubscription($app_id, $subscription_id)
+     */
+    public function deleteSubscription($app_id, $subscription_id)
     {
         $endpoint = "https://api.hubapi.com/webhooks/v1/{$app_id}/subscriptions/{$subscription_id}";
 
@@ -68,9 +72,10 @@ class Webhooks extends Resource
      * Get webhook settings.
      *
      * @param int $app_id
+     *
      * @return \SevenShores\Hubspot\Http\Response
-     */    
-    function viewSettings($app_id)
+     */
+    public function viewSettings($app_id)
     {
         $endpoint = "https://api.hubapiqa.com/webhooks/v1/{$app_id}/settings";
 
@@ -82,9 +87,10 @@ class Webhooks extends Resource
      *
      * @param int   $app_id
      * @param array $settings
+     *
      * @return \SevenShores\Hubspot\Http\Response
-     */    
-    function updateSettings($app_id, $settings)
+     */
+    public function updateSettings($app_id, $settings)
     {
         $endpoint = "https://api.hubapiqa.com/webhooks/v1/{$app_id}/settings";
 
@@ -92,5 +98,4 @@ class Webhooks extends Resource
 
         return $this->client->request('put', $endpoint, $options);
     }
-
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace SevenShores\Hubspot\Resources;
 
 use SevenShores\Hubspot\Exceptions\HubspotException;
@@ -7,12 +8,14 @@ class Deals extends Resource
 {
     /**
      * @param array $deal Array of deal properties.
-     * @return mixed
+     *
      * @throws HubSpotException
+     *
+     * @return mixed
      */
-    function create(array $deal)
+    public function create(array $deal)
     {
-        $endpoint = "https://api.hubapi.com/deals/v1/deal";
+        $endpoint = 'https://api.hubapi.com/deals/v1/deal';
 
         $options['json'] = $deal;
 
@@ -20,11 +23,12 @@ class Deals extends Resource
     }
 
     /**
-     * @param int $id The deal id.
+     * @param int   $id   The deal id.
      * @param array $deal The deal properties to update.
+     *
      * @return mixed
      */
-    function update($id, array $deal)
+    public function update($id, array $deal)
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/{$id}";
 
@@ -36,23 +40,25 @@ class Deals extends Resource
     /**
      * @param array $params
      *
-     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    function getAll(array $params = []){
-        $endpoint = "https://api.hubapi.com/deals/v1/deal/paged";
+    public function getAll(array $params = [])
+    {
+        $endpoint = 'https://api.hubapi.com/deals/v1/deal/paged';
 
         $queryString = build_query_string($params);
 
         return $this->client->request('get', $endpoint, [], $queryString);
     }
 
-
     /**
      * @param int $id
+     *
      * @return mixed
      */
-    function delete($id)
+    public function delete($id)
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/{$id}";
 
@@ -61,11 +67,12 @@ class Deals extends Resource
 
     /**
      * @param array $params Optional parameters ['limit', 'offset']
+     *
      * @return mixed
      */
-    function getRecentlyModified(array $params = [])
+    public function getRecentlyModified(array $params = [])
     {
-        $endpoint = "https://api.hubapi.com/deals/v1/deal/recent/modified";
+        $endpoint = 'https://api.hubapi.com/deals/v1/deal/recent/modified';
         $queryString = build_query_string($params);
 
         return $this->client->request('get', $endpoint, [], $queryString);
@@ -73,11 +80,12 @@ class Deals extends Resource
 
     /**
      * @param array $params Optional parameters ['limit', 'offset']
+     *
      * @return mixed
      */
-    function getRecentlyCreated(array $params = [])
+    public function getRecentlyCreated(array $params = [])
     {
-        $endpoint = "https://api.hubapi.com/deals/v1/deal/recent/created";
+        $endpoint = 'https://api.hubapi.com/deals/v1/deal/recent/created';
         $queryString = build_query_string($params);
 
         return $this->client->request('get', $endpoint, [], $queryString);
@@ -85,9 +93,10 @@ class Deals extends Resource
 
     /**
      * @param int $id
+     *
      * @return mixed
      */
-    function getById($id)
+    public function getById($id)
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/{$id}";
 
@@ -95,53 +104,57 @@ class Deals extends Resource
     }
 
     /**
-     * @param int $dealId
+     * @param int       $dealId
      * @param int|int[] $companyIds
+     *
      * @return mixed
      */
-    function associateWithCompany($dealId, $companyIds)
+    public function associateWithCompany($dealId, $companyIds)
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/{$dealId}/associations/COMPANY";
 
-        $queryString = build_query_string(['id' => (array)$companyIds]);
+        $queryString = build_query_string(['id' => (array) $companyIds]);
 
         return $this->client->request('put', $endpoint, [], $queryString);
     }
 
     /**
-     * @param int $dealId
+     * @param int       $dealId
      * @param int|int[] $companyIds
+     *
      * @return mixed
      */
-    function disassociateFromCompany($dealId, $companyIds)
+    public function disassociateFromCompany($dealId, $companyIds)
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/{$dealId}/associations/COMPANY";
 
-        $queryString = build_query_string(['id' => (array)$companyIds]);
+        $queryString = build_query_string(['id' => (array) $companyIds]);
 
         return $this->client->request('delete', $endpoint, [], $queryString);
     }
 
     /**
-     * @param int $dealId
+     * @param int       $dealId
      * @param int|int[] $contactIds
+     *
      * @return mixed
      */
-    function associateWithContact($dealId, $contactIds)
+    public function associateWithContact($dealId, $contactIds)
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/{$dealId}/associations/CONTACT";
 
-        $queryString = build_query_string(['id' => (array)$contactIds]);
+        $queryString = build_query_string(['id' => (array) $contactIds]);
 
         return $this->client->request('put', $endpoint, [], $queryString);
     }
-    
+
     /**
-     * @param int $contactId
-     * @param array $params Optional parameters ['limit', 'offset']
+     * @param int   $contactId
+     * @param array $params    Optional parameters ['limit', 'offset']
+     *
      * @return mixed
      */
-    function associatedWithContact($contactId, $params = [])
+    public function associatedWithContact($contactId, $params = [])
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/associated/contact/{$contactId}/paged";
 
@@ -151,23 +164,25 @@ class Deals extends Resource
     }
 
     /**
-     * @param int $dealId
+     * @param int       $dealId
      * @param int|int[] $contactIds
+     *
      * @return mixed
      */
-    function disassociateFromContact($dealId, $contactIds)
+    public function disassociateFromContact($dealId, $contactIds)
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/{$dealId}/associations/CONTACT";
 
-        $queryString = build_query_string(['id' => (array)$contactIds]);
+        $queryString = build_query_string(['id' => (array) $contactIds]);
 
         return $this->client->request('delete', $endpoint, [], $queryString);
     }
 
     /**
      * @param string $objectType
-     * @param int $objectId
-     * @param array $params
+     * @param int    $objectId
+     * @param array  $params
+     *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      *
      * @see https://developers.hubspot.com/docs/methods/deals/get-associated-deals

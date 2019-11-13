@@ -7,10 +7,11 @@ class EcommerceBridge extends Resource
     /**
      * Installs the ecommerce bridge into a portal.
      *
-     * @return \SevenShores\Hubspot\Http\Response
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
-    function install()
+    public function install()
     {
         $endpoint = 'https://api.hubapi.com/extensions/ecomm/v1/installs';
 
@@ -20,10 +21,11 @@ class EcommerceBridge extends Resource
     /**
      * Check the status of the ecommerce bridge.
      *
-     * @return \SevenShores\Hubspot\Http\Response
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
-    function checkInstall()
+    public function checkInstall()
     {
         $endpoint = 'https://api.hubapi.com/extensions/ecomm/v1/installs/status';
 
@@ -33,10 +35,11 @@ class EcommerceBridge extends Resource
     /**
      * Uninstall the ecommerce settings from a portal.
      *
-     * @return \SevenShores\Hubspot\Http\Response
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
-    function uninstall()
+    public function uninstall()
     {
         $endpoint = 'https://api.hubapi.com/extensions/ecomm/v1/installs/uninstall';
 
@@ -46,11 +49,13 @@ class EcommerceBridge extends Resource
     /**
      * Create or update the ecommerce settings.
      *
-     * @param  array $settings
-     * @return \SevenShores\Hubspot\Http\Response
+     * @param array $settings
+     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
-    function upsertSettings($settings = [])
+    public function upsertSettings($settings = [])
     {
         $endpoint = 'https://api.hubapi.com/extensions/ecomm/v1/settings';
 
@@ -63,10 +68,11 @@ class EcommerceBridge extends Resource
      * Delete the ecommerce settings for your app or portal.
      * Note: This action cannot be undone. If you want to disable sync messages from being applied, it is recommended that you disable the settings rather than deleting them.
      *
-     * @return \SevenShores\Hubspot\Http\Response
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
-    function deleteSettings()
+    public function deleteSettings()
     {
         $endpoint = 'https://api.hubapi.com/extensions/ecomm/v1/settings';
 
@@ -76,12 +82,14 @@ class EcommerceBridge extends Resource
     /**
      * Send a group of sync messages for a specific object type. Sync messages would be notifications of creates, updates, or deletes of ecommerce objects.
      *
-     * @param  string $objectType - The object type that the updates are for. One of CONTACT, DEAL, PRODUCT, or LINE_ITEM.
-     * @param  array  $messages
-     * @return \SevenShores\Hubspot\Http\Response
+     * @param string $objectType - The object type that the updates are for. One of CONTACT, DEAL, PRODUCT, or LINE_ITEM.
+     * @param array  $messages
+     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
-    function sendSyncMessages($objectType, $messages = [])
+    public function sendSyncMessages($objectType, $messages = [])
     {
         $endpoint = "https://api.hubapi.com/extensions/ecomm/v1/sync-messages/{$objectType}";
 
@@ -93,10 +101,11 @@ class EcommerceBridge extends Resource
     /**
      * Get errors from previously processed sync messages.
      *
-     * @return \SevenShores\Hubspot\Http\Response
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
-    function getSyncErrors()
+    public function getSyncErrors()
     {
         $endpoint = 'https://api.hubapi.com/extensions/ecomm/v1/sync-errors';
 
@@ -106,16 +115,18 @@ class EcommerceBridge extends Resource
     /**
      * Set the URI for the import initialization webhook.
      *
-     * @param  string $importTriggerUri - The URI that will be hit with the import webhook.
-     * @return \SevenShores\Hubspot\Http\Response
+     * @param string $importTriggerUri - The URI that will be hit with the import webhook.
+     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
-    function setImportUri($importTriggerUri)
+    public function setImportUri($importTriggerUri)
     {
         $endpoint = 'https://api.hubapi.com/extensions/ecomm/v1/import-settings';
 
         $options['json'] = [
-            'importTriggerUri' => $importTriggerUri
+            'importTriggerUri' => $importTriggerUri,
         ];
 
         return $this->client->request('put', $endpoint, $options);
@@ -124,10 +135,11 @@ class EcommerceBridge extends Resource
     /**
      * Retrieve the ecommerce import settings for an app.
      *
-     * @return \SevenShores\Hubspot\Http\Response
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
-    function getImportSettings()
+    public function getImportSettings()
     {
         $endpoint = 'https://api.hubapi.com/extensions/ecomm/v1/import-settings';
 
@@ -135,14 +147,16 @@ class EcommerceBridge extends Resource
     }
 
     /**
-     * @param  int    $importStartedAt - Timestamp from the import initialization request
-     * @param  string $objectType      - The object type this data corresponds to. Must be one of CONTACT, DEAL, LINE_ITEM, or PRODUCT.
-     * @param  int    $pageNumber      - A numeric page number that identifies this page of data
-     * @param  array  $messages        - The import messages
-     * @return \SevenShores\Hubspot\Http\Response
+     * @param int    $importStartedAt - Timestamp from the import initialization request
+     * @param string $objectType      - The object type this data corresponds to. Must be one of CONTACT, DEAL, LINE_ITEM, or PRODUCT.
+     * @param int    $pageNumber      - A numeric page number that identifies this page of data
+     * @param array  $messages        - The import messages
+     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
-    function importObjects($importStartedAt, $objectType, $pageNumber, $messages)
+    public function importObjects($importStartedAt, $objectType, $pageNumber, $messages)
     {
         $endpoint = "https://api.hubapi.com/import-pages/{$importStartedAt}/{$objectType}/{$pageNumber}";
 
@@ -152,20 +166,22 @@ class EcommerceBridge extends Resource
     }
 
     /**
-     * @param  int    $importStartedAt - Timestamp from the import initialization request
-     * @param  string $objectType      - The object type this data corresponds to. Must be one of CONTACT, DEAL, LINE_ITEM, or PRODUCT.
-     * @param  int    $pageCount       - The total number of pages sent via the import pages endpoint.
-     * @param  int    $itemCount       - The total number of items sent via the import pages endpoint.
-     * @return \SevenShores\Hubspot\Http\Response
+     * @param int    $importStartedAt - Timestamp from the import initialization request
+     * @param string $objectType      - The object type this data corresponds to. Must be one of CONTACT, DEAL, LINE_ITEM, or PRODUCT.
+     * @param int    $pageCount       - The total number of pages sent via the import pages endpoint.
+     * @param int    $itemCount       - The total number of items sent via the import pages endpoint.
+     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
-    function signalImportEnd($importStartedAt, $objectType, $pageCount, $itemCount)
+    public function signalImportEnd($importStartedAt, $objectType, $pageCount, $itemCount)
     {
         $endpoint = "https://api.hubapi.com/import-pages/{$importStartedAt}/{$objectType}/end";
 
         $options['json'] = [
             'pageCount' => $pageCount,
-            'itemCount' => $itemCount
+            'itemCount' => $itemCount,
         ];
 
         return $this->client->request('put', $endpoint, $options);

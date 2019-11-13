@@ -7,10 +7,11 @@ class BlogPosts extends Resource
     /**
      * Create a new blog post.
      *
-     * @param  array $params Optional Parameters.
+     * @param array $params Optional Parameters.
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function create($params = [])
+    public function create($params = [])
     {
         $endpoint = 'https://api.hubapi.com/content/api/v2/blog-posts';
 
@@ -22,12 +23,13 @@ class BlogPosts extends Resource
     /**
      * Get all blog posts.
      *
-     * @param  array $params Optional parameters.
+     * @param array $params Optional parameters.
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function all($params = [])
+    public function all($params = [])
     {
-        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts";
+        $endpoint = 'https://api.hubapi.com/content/api/v2/blog-posts';
 
         $queryString = build_query_string($params);
 
@@ -37,11 +39,12 @@ class BlogPosts extends Resource
     /**
      * Update a blog post.
      *
-     * @param  int   $id     The blog post id.
-     * @param  array $params The blog post fields to update.
+     * @param int   $id     The blog post id.
+     * @param array $params The blog post fields to update.
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function update($id, $params = [])
+    public function update($id, $params = [])
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}";
 
@@ -53,10 +56,11 @@ class BlogPosts extends Resource
     /**
      * Delete a blog post.
      *
-     * @param  int $id
+     * @param int $id
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function delete($id)
+    public function delete($id)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}";
 
@@ -66,10 +70,11 @@ class BlogPosts extends Resource
     /**
      * Get a specific blog post.
      *
-     * @param  int $id
+     * @param int $id
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getById($id)
+    public function getById($id)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}";
 
@@ -81,11 +86,12 @@ class BlogPosts extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/blogv2/put_blog_posts_blog_post_id_buffer
      *
-     * @param  int   $id     The blog post ID.
-     * @param  array $params Allowed parameters.
+     * @param int   $id     The blog post ID.
+     * @param array $params Allowed parameters.
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function updateAutoSaveBuffer($id, $params = [])
+    public function updateAutoSaveBuffer($id, $params = [])
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/buffer";
 
@@ -97,10 +103,11 @@ class BlogPosts extends Resource
     /**
      * Gets the current contents of the auto-save buffer.
      *
-     * @param  int $id The blog post ID
+     * @param int $id The blog post ID
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getAutoSaveBufferContents($id)
+    public function getAutoSaveBufferContents($id)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/buffer";
 
@@ -109,13 +116,14 @@ class BlogPosts extends Resource
 
     /**
      * Clone the blog post.
-     * Requires including a request body of {"name": "New Page Name"}
+     * Requires including a request body of {"name": "New Page Name"}.
      *
-     * @param  int $id The blog post ID
-     * @param  string $name The cloned post name
+     * @param int    $id   The blog post ID
+     * @param string $name The cloned post name
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function clonePost($id, $name)
+    public function clonePost($id, $name)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/clone";
 
@@ -127,10 +135,11 @@ class BlogPosts extends Resource
     /**
      * Determine if the auto-save buffer differs from the live blog post.
      *
-     * @param  int $id The blog post ID
+     * @param int $id The blog post ID
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function hasBufferedChanges($id)
+    public function hasBufferedChanges($id)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/has-buffered-changes";
 
@@ -146,11 +155,12 @@ class BlogPosts extends Resource
      *     the existing publish_date time.
      * "cancel-publish": cancels a previous schedule-publish action.
      *
-     * @param  int    $id     The blog post ID
-     * @param  string $action The publish action
+     * @param int    $id     The blog post ID
+     * @param string $action The publish action
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function publishAction($id, $action)
+    public function publishAction($id, $action)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/publish-action";
 
@@ -162,10 +172,11 @@ class BlogPosts extends Resource
     /**
      * Copies the contents of the auto-save buffer into the live blog post.
      *
-     * @param  int $id The blog post ID
+     * @param int $id The blog post ID
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function pushBufferLive($id)
+    public function pushBufferLive($id)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/push-buffer-live";
 
@@ -175,10 +186,11 @@ class BlogPosts extends Resource
     /**
      * Restores a previously deleted blog post.
      *
-     * @param  int $id The blog post ID
+     * @param int $id The blog post ID
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function restoreDeleted($id)
+    public function restoreDeleted($id)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/restore-deleted";
 
@@ -188,10 +200,11 @@ class BlogPosts extends Resource
     /**
      * Validates the auto-save buffer version of the blog post.
      *
-     * @param  int $id The blog post ID
+     * @param int $id The blog post ID
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function validateBuffer($id)
+    public function validateBuffer($id)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/validate-buffer";
 
@@ -201,10 +214,11 @@ class BlogPosts extends Resource
     /**
      * List previous versions of the blog post.
      *
-     * @param  int $id The blog post ID
+     * @param int $id The blog post ID
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function versions($id)
+    public function versions($id)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/versions";
 
@@ -216,9 +230,10 @@ class BlogPosts extends Resource
      *
      * @param int $post_id    The blog post ID
      * @param int $version_id The version ID
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getVersion($post_id, $version_id)
+    public function getVersion($post_id, $version_id)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$post_id}/versions/{$version_id}";
 
@@ -230,9 +245,10 @@ class BlogPosts extends Resource
      *
      * @param int $post_id    The blog post ID
      * @param int $version_id The version ID
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function restoreVersion($post_id, $version_id)
+    public function restoreVersion($post_id, $version_id)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$post_id}/versions/restore";
 

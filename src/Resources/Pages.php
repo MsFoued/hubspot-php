@@ -8,9 +8,10 @@ class Pages extends Resource
      * Create a new page.
      *
      * @param array $params Optional Parameters.
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function create($params)
+    public function create($params)
     {
         $endpoint = 'https://api.hubapi.com/content/api/v2/pages';
 
@@ -23,11 +24,12 @@ class Pages extends Resource
      * Get all pages.
      *
      * @param array $params Optional parameters.
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function all($params = [])
+    public function all($params = [])
     {
-        $endpoint = "https://api.hubapi.com/content/api/v2/pages";
+        $endpoint = 'https://api.hubapi.com/content/api/v2/pages';
 
         $queryString = build_query_string($params);
 
@@ -39,9 +41,10 @@ class Pages extends Resource
      *
      * @param int   $page_id The page id.
      * @param array $params  The page fields to update.
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function update($page_id, $params)
+    public function update($page_id, $params)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}";
 
@@ -54,9 +57,10 @@ class Pages extends Resource
      * Delete a page.
      *
      * @param int $page_id
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function delete($page_id)
+    public function delete($page_id)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}";
 
@@ -67,9 +71,10 @@ class Pages extends Resource
      * Get a specific page.
      *
      * @param int $page_id
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getById($page_id)
+    public function getById($page_id)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}";
 
@@ -80,9 +85,10 @@ class Pages extends Resource
      * Updates the auto-save buffer.
      *
      * @param in $page_id The page ID
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function updateAutoSaveBuffer($page_id)
+    public function updateAutoSaveBuffer($page_id)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/buffer";
 
@@ -93,23 +99,25 @@ class Pages extends Resource
      * Gets the current contents of the auto-save buffer.
      *
      * @param int $page_id The page ID
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getAutoSaveBufferContents($page_id)
+    public function getAutoSaveBufferContents($page_id)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/buffer";
 
         return $this->client->request('get', $endpoint);
     }
 
-	/**
-	 * Clone the page.
-	 *
-	 * @param int $page_id The page ID
-	 * @param string $name The cloned page name
-	 * @return \SevenShores\Hubspot\Http\Response
-	 */
-    function clonePage($page_id, $name)
+    /**
+     * Clone the page.
+     *
+     * @param int    $page_id The page ID
+     * @param string $name    The cloned page name
+     *
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    public function clonePage($page_id, $name)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/clone";
 
@@ -122,9 +130,10 @@ class Pages extends Resource
      * Determine if the auto-save buffer differs from the live page.
      *
      * @param int $page_id The page ID
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function hasBufferedChanges($page_id)
+    public function hasBufferedChanges($page_id)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/has-buffered-changes";
 
@@ -142,9 +151,10 @@ class Pages extends Resource
      *
      * @param int    $page_id The page ID
      * @param string $action  The publish action
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function publishAction($page_id, $action)
+    public function publishAction($page_id, $action)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/publish-action";
 
@@ -157,9 +167,10 @@ class Pages extends Resource
      * Copies the contents of the auto-save buffer into the live page.
      *
      * @param int $page_id The page ID
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function pushBufferLive($page_id)
+    public function pushBufferLive($page_id)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/push-buffer-live";
 
@@ -170,9 +181,10 @@ class Pages extends Resource
      * Restores a previously deleted page.
      *
      * @param int $page_id The page ID
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function restoreDeleted($page_id)
+    public function restoreDeleted($page_id)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/restore-deleted";
 
@@ -183,9 +195,10 @@ class Pages extends Resource
      * Validates the auto-save buffer version of the page.
      *
      * @param int $page_id The page ID
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function validateBuffer($page_id)
+    public function validateBuffer($page_id)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/validate-buffer";
 
@@ -196,9 +209,10 @@ class Pages extends Resource
      * List previous versions of the page.
      *
      * @param int $page_id The page ID
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function versions($page_id)
+    public function versions($page_id)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/versions";
 
@@ -210,9 +224,10 @@ class Pages extends Resource
      *
      * @param int $page_id    The page ID
      * @param int $version_id The version ID
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function restoreVersion($page_id, $version_id)
+    public function restoreVersion($page_id, $version_id)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/versions/restore";
 
